@@ -314,6 +314,7 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
              [self updateDrawerVisualStateForDrawerSide:visibleSide percentVisible:0.0];
          }
          completion:^(BOOL finished) {
+            if (!finished) return;
              [sideDrawerViewController endAppearanceTransition];
              [self setOpenSide:MMDrawerSideNone];
              [self resetDrawerVisualStateForDrawerSide:visibleSide];
@@ -370,6 +371,7 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
                  [self updateDrawerVisualStateForDrawerSide:drawerSide percentVisible:1.0];
              }
              completion:^(BOOL finished) {
+                if (!finished) return;
                  //End the appearance transition if it already wasn't open.
                  if(drawerSide != self.openSide){
                      [sideDrawerViewController endAppearanceTransition];
@@ -532,7 +534,7 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
              [sideDrawerViewController.view setFrame:self.childControllerContainerView.bounds];
          }
          completion:^(BOOL finished) {
-
+             if (!finished) return;
              CGRect oldCenterRect = self.centerContainerView.frame;
              [self setCenterViewController:newCenterViewController animated:animated];
              [self.centerContainerView setFrame:oldCenterRect];
@@ -551,6 +553,7 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
                  [self updateDrawerVisualStateForDrawerSide:self.openSide percentVisible:0.0];
              }
              completion:^(BOOL finished) {
+                if (!finished) return;
                  if (forwardAppearanceMethodsToCenterViewController) {
                      [self.centerViewController endAppearanceTransition];
                      [self.centerViewController didMoveToParentViewController:self];
@@ -620,6 +623,7 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
              [sideDrawerViewController.view setFrame:sideDrawerViewController.mm_visibleDrawerFrame];
          }
          completion:^(BOOL finished) {
+            if (!finished) return;
              if(completion != nil){
                  completion(finished);
              }
